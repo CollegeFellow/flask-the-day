@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Profile</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css" integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+</head>
+<body>
+	<header>
+		<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+			<a class="navbar-brand" href="/">Akshay</a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarNav">
+				<ul class="navbar-nav">
+					<li class="nav-item">
+						<a class="nav-link" href="/">Home</a>
+					</li>
+					<li class="nav-item active">
+						<a class="nav-link" href="/profile">Profiles</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	<div class="container">
+		<section>
+
+			<div class="row">
+
+			<div class="col-md-12">
+				<h1>Profile Page</h1>
+
+				{% if data['user_id'] != None %}
+				{% set user_id = data['user_id'] %}
+				{% set user_data = data['user_data'][user_id] %}
+				<p>This is the profile of:</p>
+			</div>
+
+			<div class="col-md-8">
+				<img src="/static/{{ user_data.image }}" alt="{{ user_data.name }}" class="img-fluid">
+			</div>
+			<div class="col-md-4">
+				<p><strong>{{ user_data.name }}</strong></p>
+				<br><br>
+				<a class="btn btn-primary" href="/profile">< Go back to all profiles</a>
+			</div>
+			
+			{% else %}
+			
+			<p>Check out these profiles:</p>
+			<ul>
+				{% for i,j in data['user_data'].items() %}
+				<li><a href="/profile/{{ i }}">{{ j.name }}</a></li>
+				{% endfor %}
+			</ul>
+			{% endif %}
+			</div>
+		</section>
+	</div>
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.3/umd/popper.min.js" integrity="sha384-vFJXuSJphROIrBnz7yo7oB41mKfc8JzQZiCq4NCceLEaO4IHwicKwpJf9c9IpFgh" crossorigin="anonymous"></script>
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/js/bootstrap.min.js" integrity="sha384-alpBpkh1PFOepccYVYDB4do5UnbKysX5WZXm3XxPqe5iKTfUKjNkCk9SaVuEZflJ" crossorigin="anonymous"></script>
+</body>
+</html>
